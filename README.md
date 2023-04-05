@@ -19,3 +19,4 @@ https://github.com/fstubing
 - Se agrega backup de base de datos con elementos de prueba
 - Proyecto tiene disponibilidad de conexión a base de datos en la nube con datos en archivo .env, pero esa base está vacía
 - En el backup de la base de datos se incluyo usuario de prueba jespinoza@mail.com con password 1234.
+- Para mayores dudas o consultas me pueden comunicar al 986955944 o email fstubing@yahoo.com
