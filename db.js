@@ -21,11 +21,6 @@ const pool = new Pool({
 });
 
 
-const update = {
-    text:'UPDATE tabla SET campo = $1 WHERE id = $2 RETURNING *',
-    values: []
-};
-
 const insertUsuario = {
     text:'INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, avatar, password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
     values: []
@@ -90,6 +85,16 @@ const selectCategoriaNoticiasDesc = {
 
 const insertReacion = {
     text:'INSERT INTO reacciones (reaccion, fecha_creacion, entrada_id, usuario_id) VALUES ($1, $2, $3, $4) RETURNING *',
+    values: []
+};
+
+const cuentaLikes = {
+    text:`select count(id) from reacciones where entrada_id = $1 and reaccion = 'like'`,
+    values: []
+};
+
+const cuentaDislikes = {
+    text:`select count(id) from reacciones where entrada_id = $1 and reaccion = 'dislike'`,
     values: []
 };
 
@@ -473,29 +478,48 @@ const nuevaReaccion= async (req, res) => {
         let {entrada} = req.query
         let entradaId = parseInt(entrada)
 
-        let {like} = req.body;
-
+        let {obs} = req.body;
         let fecha = new Date()
 
-        insertComentario.values = [comentarioCuerpo, fecha, entradaId, userData.id]
-        let nuevoComentario = await pool.query(insertComentario)
+        insertReacion.values = [obs, fecha, entradaId, userData.id]
+        let nuevaReaccion = await pool.query(insertReacion)
 
-        if(nuevoComentario.name == 'Error') {
-            return res.status(500).json({code:500, message: 'No se pudo crear comentario correctamente'})
-        } else if(nuevoComentario.rowCount==0){
-            return res.status(400).json({code:400, message: 'No se pudo crear comentario correctamente'})
+        if(nuevaReaccion.name == 'Error') {
+            return res.status(500).json({code:500, message: 'No se pudo crear reacción correctamente'})
+        } else if(nuevaReaccion.rowCount==0){
+            return res.status(400).json({code:400, message: 'No se pudo crear reacción correctamente'})
         }else {
-            return res.status(201).json({code: 201, message: 'Comentario creado exitosamente'});
+            return res.status(201).json({code: 201, message: 'reacción registrada exitosamente'});
         }
 
     } catch (error) {
         console.log(error)
-        return res.status(500).json({code:500, message: 'No se pudo crear comentario correctamente'})
+        return res.status(500).json({code:500, message: 'No se pudo crear reacción correctamente'})
     }
 }
+
+/* const contadorReaccion = async (req, res) => {
+    try {
+        let {entrada} = req.query
+        let entradaId = parseInt(entrada)
+        cuentaLikes.values = [entradaId]
+        cuentaDislikes.values = [entradaId]
+        let likes = await pool.query(cuentaLikes)
+        let dislike = await pool.query(cuentaDislikes)
+        let arrayRespuesta = []
+
+        arrayRespuesta.push(likes.rows)
+        arrayRespuesta.push(dislike.rows)
+     
+        return res.status(200).json({code: 200, message: arrayRespuesta});
+
+    } catch (error) {
+        
+    }
+} */
 
 
 module.exports = {
     addUser, buscaMail, buscaUser, autenticador, verificarToken, publicar, nuevaEntrada, vistaHome, detalleEntrada, nuevoComentario, filtroNoticias, filtroNoticiasCat,
-    filtroCategorias
+    filtroCategorias, nuevaReaccion
 }

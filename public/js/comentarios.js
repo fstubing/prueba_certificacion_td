@@ -32,36 +32,60 @@ document.getElementById('contadorComentarios').innerText = comentarios.length
 
 let btn1 = document.querySelector('#green');
 let btn2 = document.querySelector('#red');
-let like = "like"
-let dislike = "dislike"
+let react
 
 btn1.addEventListener('click', function() {
-    axios.post('/usuarios/reaccion?entrada='+idEntrada+'&token='+token, like)
+
+    react={obs: "like"}
+
+    if (btn2.classList.contains('red')) {
+        btn2.classList.remove('red');
+    } 
+    this.classList.toggle('green');
+
+    axios.post('/usuarios/reaccion?entrada='+idEntrada+'&token='+token, react)
         .then(function (response) {
                 console.log(response)
-                alert("Nuevo comentario ingresado correctamente")
-                formularioComentario.reset()
+                alert("Hemos registrado tu reaccion")
         })
         .catch(function (error) {
             console.log(error)
             alert(`Código: ${error.response.data.code} \nMensaje: ${error.response.data.message}`);
         })
-
-    if (btn2.classList.contains('red')) {
-      btn2.classList.remove('red');
-    } 
-  this.classList.toggle('green');
-  
+    
 });
-
-
 
 
 btn2.addEventListener('click', function() {
   
+    react={obs: "dislike"}
+
     if (btn1.classList.contains('green')) {
-      btn1.classList.remove('green');
+        btn1.classList.remove('green');
     } 
-  this.classList.toggle('red');
-  
+    this.classList.toggle('red');
+
+    axios.post('/usuarios/reaccion?entrada='+idEntrada+'&token='+token, react)
+        .then(function (response) {
+                console.log(response)
+                alert("Hemos registrado tu reaccion")
+        })
+        .catch(function (error) {
+            console.log(error)
+            alert(`Código: ${error.response.data.code} \nMensaje: ${error.response.data.message}`);
+        })
+    
 });
+
+
+/* axios.get('/reacciones?entrada='+idEntrada)
+    .then(function (response) {     
+          console.log(response)     
+    })
+    .catch(function (error) {
+       alert(`Código: ${error.response.data.code} \nMensaje: ${error.response.data.message}`);
+    });
+
+function cargarTabla(data){
+
+} */

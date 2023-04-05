@@ -11,7 +11,7 @@ const app = express();
 
 require('dotenv').config();
 const {addUser, buscaMail, buscaUser, autenticador, verificarToken, publicar, nuevaEntrada, vistaHome, detalleEntrada, nuevoComentario, 
-    filtroNoticias, filtroNoticiasCat, filtroCategorias} = require('./db')
+    filtroNoticias, filtroNoticiasCat, filtroCategorias, nuevaReaccion} = require('./db')
 
 //MIDDLEWARE
 app.use(express.json());
@@ -69,7 +69,9 @@ app.get('/archivo/:categoria', filtroNoticiasCat, (req, res)=> {});
 
 app.get('/buscador/categorias', filtroCategorias, (req, res)=> {});
 
-app.post('/usuarios/reaccion', verificarToken, nuevoComentario, (req, res) => {})
+app.post('/usuarios/reaccion', verificarToken, nuevaReaccion, (req, res) => {})
+
+//app.get('/reaccion', contadorReaccion, (req, res)=> {});
 
 app.all("*", (req, res) => {
     res.status(404).send("<p>Ruta no existe <a href='/'>Volver al Home</a></p>")
