@@ -1,0 +1,62 @@
+{{>navbar}}
+<main class="container py-5">
+    <h2 class="mb-5">CREAR CUENTA EN MI SITIO</h2>
+    <form class="row g-3" id="registroForm" encType="multipart/form-data">
+        <div class="col-12 col-md-4">
+            <label for="nombreRegistro" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombreRegistro" name="nombreRegistro" required>
+        </div>
+        <div class="col-12 col-md-4">
+            <label for="apellidoRegistro" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellidoRegistro" name="apellidoRegistro" required>
+        </div>
+        <div class="col-12 col-md-4">
+            <label for="emailRegistro" class="form-label">Email</label>
+            <div class="input-group">
+                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                <input type="email" class="form-control" id="emailRegistro" name="emailRegistro"
+                    aria-describedby="inputGroupPrepend" required>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <label for="nacimientoRegistro" class="form-label">Fecha de Nacimiento</label>
+            <input type="date" class="form-control" id="nacimientoRegistro" name="nacimientoRegistro" required>
+        </div>
+        <div class="col-12 col-md-4">
+            <label for="generoRegistro" class="form-label">Género</label>
+            <select class="form-select" id="generoRegistro" name="generoRegistro" required>
+                <option value="indeterminado">Prefiero no decir</option>
+                <option value="hombre">Hombre</option>
+                <option value="mujer">Mujer</option>
+            </select>
+        </div>
+        <div class="col-12 col-md-4">
+            <label for="avatarRegistro" class="form-label">Imagen Avatar</label>
+            <input type="file" class="form-control" aria-label="file example" id="avatarRegistro" name="avatarRegistro">
+        </div>
+        <div class="col-md-12">
+            <label for="claveRegistro" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="claveRegistro" name="claveRegistro" required>
+        </div>
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="aceptoTyC" id="tyc" required>
+                <label class="form-check-label" for="tyc">
+                    Acepto <a href="" target="_blank">Términos y Condiciones</a>
+                </label>
+            </div>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Registrarse</button>
+        </div>
+    </form>
+
+</main>
+
+
+{{>footer}}
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../public/js/registro.js"></script>
+<script src="../public/js/login.js"></script>

@@ -1,0 +1,52 @@
+{{>navbar}}
+<main class="container">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner m-auto">
+            <div class="carousel-item active">
+                <img src="../public/img/0cc3bd-naruto.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="../public/img/ab7785-tokyo-revengers-1080x675.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="../public/img/b64315-kimetsu-no-yaiba-segunda-temporada-980x552.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
+
+    <hr id="destacados">
+    
+    <section class="container mt-5">
+        <h2 class="text-decoration-underline mb-5">ULTIMAS NOTICIAS PUBLICADAS EN EL BLOG</h2>
+        <div class="row">
+            {{#if entradasRender}}
+                    {{#each entradasRender }}
+                        <div class="col-12 col-md-6 col-lg-4 mt-3">
+                            <div class="card mb-3 h-100" id="contenedor-cards">
+                                <img src="../public/img/{{imagen_entrada}}" class="card-img-top h-100" alt="imagen de {{titulo}}">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase"><a href="./entrada/{{id}}" class="link-dark link-underline link-underline-opacity-0">{{titulo}}</a></h5>
+                                    <p class="card-text">Por {{autor}}</p>
+                                </div>
+                                <div>
+                                    <p class="card-footer"><small class="text-body-secondary">Fecha {{fecha fecha_creacion}}</small></p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                {{/each }}
+
+                {{else}}
+                <h2 class="text-center mt-2">Nada para mostrar</h2>
+            {{/if}}
+            
+        </div>
+    </section>
+
+</main>
+
+
+{{>footer}}
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../public/js/login.js"></script>

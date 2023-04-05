@@ -1,0 +1,43 @@
+{{>navbar}}
+
+<main>
+    <section class="container">
+        <h2 class="my-5">REGISTRO DE NOTICIAS</h2>
+        <section id="infoSelector">
+            Categorías:
+            <select name="optionCategoria" id="optionCategoria" autofocus>
+                <option value="todo">Todas</option>
+                <option value="1">Shonen</option>
+                <option value="2">Seinen</option>
+            </select>
+            / Orden:
+            <select name="optionOrden" id="optionOrden" autofocus>
+                <option value="desc">Más reciente</option>
+                <option value="asc">Más antigua</option>
+            </select>
+            <p class="mt-3">Al dar click en 'Ver' se desplegará información en la tabla conforme a los parámetros requeridos: </p>
+            <button class="btn btn-primary" id="btnSiguiente">Ver</button>
+        </section>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Título</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Ver Entrada</th>
+                </tr>
+            </thead>
+            <tbody id="receptorFilas">
+            </tbody>
+        </table>
+    </section>
+</main>
+
+
+{{>footer}}
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../public/js/login.js"></script>
+<script src="../public/js/archivo.js"></script>

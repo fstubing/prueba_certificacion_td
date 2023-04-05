@@ -1,0 +1,60 @@
+<header>
+    {{>navbar}}
+
+    <h2 class="text-center">AÑADIR NUEVA ENTRADA AL BLOG</h2>
+</header>
+
+{{#if error}}
+<h2 class="text-center mt-3">{{error}}</h2>
+
+{{else}}
+
+<main class="container">
+    <form class="form-floating" id="form-entrada">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="entradaUserId" name="entradaUserId" value="{{userRender.id}}" disabled>
+            <label for="entradaUserId">ID Autor</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="entradaUserNombre" name="entradaUserNombre" value="{{userRender.nombre}} {{userRender.apellido}}" disabled>
+            <label for="entradaUserNombre">Autor</label>
+        </div>
+        <div class="form-floating mb-3">
+            <select class="form-select" id="entradaUserAvatar" name="entradaUserAvatar" aria-label="Floating label select example" required>
+                <option value="{{userRender.avatar}}">Subir con mi Avatar</option>
+                <option value="user_default.png">Subir con imagen por defecto</option>
+            </select>
+            <label for="entradaUserAvatar">Imagen Avatar</label>
+        </div>
+        <div class="form-floating mb-3">
+            <select class="form-select" id="entradaCategoria" name="entradaCategoria" aria-label="Floating label select example" required>
+                <option value="1">Shonen</option>
+                <option value="2">Seinen</option>
+            </select>
+            <label for="entradaCategoria">Categoría de la Entrada</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="entradaTitulo" name="entradaTitulo" required>
+            <label for="entradaTitulo">Título de la Entrada</label>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea class="form-control" id="entradaCuerpo" name="entradaCuerpo" maxlength="2000" placeholder="máximo 2000 caracteres" required></textarea>
+            <label for="entradaCuerpo">Escribe aquí tu Entrada</label>
+            <p id="cuerpoContador" class="ps-1">0/2000</p>
+        </div>
+        <div class="mb-3">
+            <label for="entradaImagen" class="form-label">Agrega una imagen a tu Entrada</label>
+            <input class="form-control form-control-sm" id="entradaImagen" name="entradaImagen" type="file" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Subir</button>
+    </form>
+</main>
+
+{{/if }}
+
+{{>footer}}
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../public/js/publicacion.js"></script>
+<script src="../public/js/login.js"></script>
